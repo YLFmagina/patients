@@ -1,0 +1,8 @@
+ch:
+
+  layouts:
+  	application:
+  		title: '在线医院'
+  		locationmanage: '部门信息'
+  		patientmanage: '病患信息'
+  		ontreatment: '正在治疗'

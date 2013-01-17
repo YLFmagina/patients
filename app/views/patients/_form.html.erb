@@ -1,0 +1,53 @@
+<%= form_for(@patient) do |f| %>
+  <% if @patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+      <% @patient.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :middle_name %><br />
+    <%= f.text_field :middle_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :birthday %><br />
+    <%= f.date_select :birthday,:start_year => 1950 %>
+  </div>
+  <div class="field"> 
+    <%= f.label :Gender %><br />
+    <%= radio_button "patient", "gender",0%>
+    <%= f.label :Male %>
+    <%= radio_button "patient", "gender",1 %>
+    <%= f.label :Female %>
+    <%= radio_button "patient", "gender",2 %>
+    <%= f.label :Other %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br />
+    <%= select "patient","status", options_for_select([ "Initial", 
+      "Referred", "Treatment", "Closed" ], "Initial") %>
+  </div>
+  <div class="field">
+    <%= f.label :location_id %><br />
+    <%= select  "patient", "location_id",      
+        Location.all.collect {|p| [ p.name, p.id ] },  
+        { :include_blank => true } %>
+  </div>  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

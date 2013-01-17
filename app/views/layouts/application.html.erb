@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patients</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body id = "patient">
+	<div id = "banner">
+		<%= form_tag hospital_path, :class => 'locale' do %>
+		<%= select_tag 'set_locale',
+			options_for_select(LANGUAGES, I18n.locale.to_s),
+			:onchange => 'this.form.submit()' %>
+			<%= submit_tag 'submit' %>
+			<%= javascript_tag "$$('.locale input').each(Element.hide)"%>
+		<% end %>
+		<%= image_tag("logo.bmp") %>
+		<%= @page_tittle || I18n.t('.title') %>
+	</div>
+	<div id = "columns">
+		<div id = "side">
+			<%= link_to I18n.t('.locationmanage'),locations_path %><br />
+			<%= link_to I18n.t('.patientmanage'),patients_path %><br />
+			<%= link_to I18n.t('.ontreatment'),{:action => "ontreatment",
+			 :controller => "patients"} %>
+		</div>
+		<div id = "main">
+			<%= yield %>
+		</div>
+
+</body>
+</html>

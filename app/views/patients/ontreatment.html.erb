@@ -1,0 +1,32 @@
+<h1>Patients onTreatment</h1>
+<table>
+
+    <% @patients.each do |patient| %>
+      <tr class="<%= cycle('list_line_odd','list_line_even') %>">
+        <td>
+            <b>MR Number: </b>
+            <%= Patient.mr_number(patient) %><br />
+            <b>Full Name: </b>
+            <%= Patient.fullname(patient) %><br />
+            <b>Birthday: </b>
+            <%= patient.birthday %><br />
+            <b>Gender: </b>
+            <% if patient.gender = 1 -%>Female
+            <% else -%>Male
+            <% end -%><br />
+            <b>Status: </b>
+            <%= patient.status %><br />
+            <b>Viewed count: </b>
+            <%= patient.viewed_count %><br />
+            <b>Location: </b>
+            <%= link_to patient.location.name, patient.location %></td>
+        <td class="list_action">
+            <%= link_to 'View', patient %><br />
+            <%= link_to 'Edit', edit_patient_path(patient) %><br />
+            <%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+
+
+<%= link_to 'New', new_patient_path, :class => 'btn btn-primary' %>

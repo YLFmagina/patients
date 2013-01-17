@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>MR Number: </b>
+  <%= Patient.mr_number(@patient) %><br />
+</p>
+
+<p>
+  <b>Full name:</b>
+  <%= Patient.fullname(@patient) %><br />
+</p>
+
+<p>
+  <b>Age:</b>
+  <%= Time.now.year - @patient.birthday.year + 1 %>
+</p>
+<p>
+  <b>Gender:</b>
+  <% if @patient.gender == 1 -%>
+      Female
+  <% elsif @patient.gender == 0-%>
+      Male
+  <% else -%>
+      Other
+  <% end -%>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @patient.status %>
+</p>
+
+<p>
+  <b>Viewed count:</b>
+  <%= @patient.viewed_count %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @patient.location.name %>
+</p>
+
+<%= link_to 'Edit', edit_patient_path(@patient) %> |
+<%= link_to 'Back', patients_path %>
